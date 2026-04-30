@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+:root {
+  --color-bg: #f8fafc;
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-border: #dbe3ef;
+  --color-brand: #0f766e;
+  --color-brand-strong: #115e59;
+  --color-danger: #b91c1c;
+}
+
+body {
+  background: radial-gradient(circle at top right, #e6fffa 0%, var(--color-bg) 45%);
+  color: var(--color-ink);
+  font-family: "Inter", "Avenir Next", "Segoe UI", sans-serif;
+  line-height: 1.5;
+}

@@ -24,7 +24,24 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <header class="border-b border-[var(--color-border)] bg-white/90 backdrop-blur">
+      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4">
+        <%= link_to "Easy Vote", (logged_in? ? root_path : new_session_path), class: "text-lg font-semibold tracking-tight text-[var(--color-ink)]" %>
+
+        <nav class="flex items-center gap-4 text-sm">
+          <% if logged_in? %>
+            <span class="text-[var(--color-muted)]"><%= current_user.email %></span>
+            <%= button_to "Log out", session_path, method: :delete, class: "rounded-lg border border-[var(--color-border)] px-3 py-1.5 font-medium text-[var(--color-ink)] hover:bg-slate-100" %>
+          <% else %>
+            <%= link_to "Log in", new_session_path, class: "font-medium text-[var(--color-ink)] hover:text-[var(--color-brand)]" %>
+            <%= link_to "Sign up", new_user_path, class: "rounded-lg bg-[var(--color-brand)] px-3 py-1.5 font-medium text-white hover:bg-[var(--color-brand-strong)]" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-6xl px-5 py-10">
+      <%= render "shared/flash" %>
       <%= yield %>
     </main>
   </body>
