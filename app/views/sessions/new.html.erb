@@ -15,6 +15,10 @@
     <%= f.submit "Log in", class: "w-full rounded-lg bg-[var(--color-brand)] px-4 py-2 font-medium text-white transition hover:bg-[var(--color-brand-strong)]" %>
   <% end %>
 
+  <p class="mt-4 text-sm text-[var(--color-muted)]">
+    <%= link_to "Forgot password?", new_password_reset_path, class: "font-medium text-[var(--color-brand)] hover:underline" %>
+  </p>
+
   <p class="mt-6 text-sm text-[var(--color-muted)]">
     New here?
     <%= link_to "Create account", new_user_path, class: "font-medium text-[var(--color-brand)] hover:underline" %>

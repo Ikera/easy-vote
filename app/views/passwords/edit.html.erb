@@ -1,0 +1,20 @@
+<section class="mx-auto w-full max-w-md rounded-2xl border border-[var(--color-border)] bg-white p-8 shadow-sm">
+  <h1 class="mb-6 text-2xl font-semibold tracking-tight text-[var(--color-ink)]">Set a new password</h1>
+
+  <%= form_with model: @user, url: password_path(params[:token]), method: :patch, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :password, class: "mb-1 block text-sm font-medium text-[var(--color-ink)]" %>
+      <%= f.password_field :password, class: "w-full rounded-lg border border-[var(--color-border)] px-3 py-2 focus:border-[var(--color-brand)] focus:outline-none" %>
+      <% @user.errors.full_messages_for(:password).each do |message| %>
+        <p class="mt-1 text-sm text-[var(--color-danger)]"><%= message %></p>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, class: "mb-1 block text-sm font-medium text-[var(--color-ink)]" %>
+      <%= f.password_field :password_confirmation, class: "w-full rounded-lg border border-[var(--color-border)] px-3 py-2 focus:border-[var(--color-brand)] focus:outline-none" %>
+    </div>
+
+    <%= f.submit "Update password", class: "w-full rounded-lg bg-[var(--color-brand)] px-4 py-2 font-medium text-white transition hover:bg-[var(--color-brand-strong)]" %>
+  <% end %>
+</section>
