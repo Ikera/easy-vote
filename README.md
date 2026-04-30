@@ -1,24 +1,43 @@
-# README
+# Easy Vote
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 8 app for feature voting, built in small learning-focused increments with:
+Tailwind, Turbo, Stimulus, PostgreSQL, Solid Queue, Solid Cable, Docker, and RSpec.
 
-Things you may want to cover:
+## Stack
 
-* Ruby version
+- Ruby 4.0.2
+- Rails 8.1
+- PostgreSQL
+- Solid Queue + Solid Cable
+- Turbo + Stimulus + Tailwind
+- RSpec
 
-* System dependencies
+## Local Setup (without Docker)
 
-* Configuration
+```bash
+bundle install
+bin/rails db:prepare
+bin/dev
+```
 
-* Database creation
+## Local Setup (with Docker services)
 
-* Database initialization
+Start PostgreSQL:
 
-* How to run the test suite
+```bash
+docker compose up -d db
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Run app:
 
-* Deployment instructions
+```bash
+bundle install
+bin/rails db:prepare
+bin/dev
+```
 
-* ...
+## Run tests
+
+```bash
+bundle exec rspec
+```
