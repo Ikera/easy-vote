@@ -41,3 +41,9 @@ bin/dev
 ```bash
 bundle exec rspec
 ```
+
+## Development email preview
+
+In development, emails open in Letter Opener Web:
+
+- [http://localhost:3000/letter_opener](http://localhost:3000/letter_opener)

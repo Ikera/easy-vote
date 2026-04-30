@@ -1,0 +1,18 @@
+<section class="mx-auto w-full max-w-md rounded-2xl border border-[var(--color-border)] bg-white p-8 shadow-sm">
+  <h1 class="mb-6 text-2xl font-semibold tracking-tight text-[var(--color-ink)]">Forgot your password?</h1>
+
+  <p class="mb-5 text-sm text-[var(--color-muted)]">Enter your email and we will send you a reset link.</p>
+
+  <%= form_with url: password_reset_path, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :email, class: "mb-1 block text-sm font-medium text-[var(--color-ink)]" %>
+      <%= f.email_field :email, class: "w-full rounded-lg border border-[var(--color-border)] px-3 py-2 focus:border-[var(--color-brand)] focus:outline-none" %>
+    </div>
+
+    <%= f.submit "Send reset instructions", class: "w-full rounded-lg bg-[var(--color-brand)] px-4 py-2 font-medium text-white transition hover:bg-[var(--color-brand-strong)]" %>
+  <% end %>
+
+  <p class="mt-6 text-sm text-[var(--color-muted)]">
+    <%= link_to "Back to log in", new_session_path, class: "font-medium text-[var(--color-brand)] hover:underline" %>
+  </p>
+</section>
