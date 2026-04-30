@@ -13,12 +13,7 @@ RSpec.describe "Authentication", type: :request do
     it "creates account and starts session" do
       expect {
         post users_path, params: {
-          user: {
-            name: "Ivica",
-            email: "ivica@example.com",
-            password: "password123",
-            password_confirmation: "password123"
-          }
+          user: attributes_for(:user)
         }
       }.to change(User, :count).by(1)
 
@@ -29,7 +24,7 @@ RSpec.describe "Authentication", type: :request do
   end
 
   describe "POST /session" do
-    let!(:user) { User.create!(name: "Test", email: "test@example.com", password: "password123", password_confirmation: "password123") }
+    let!(:user) { create(:user, password: "password123", password_confirmation: "password123") }
 
     it "logs in with valid credentials" do
       post session_path, params: { email: user.email, password: "password123" }
@@ -46,7 +41,7 @@ RSpec.describe "Authentication", type: :request do
   end
 
   describe "DELETE /session" do
-    let!(:user) { User.create!(name: "Test", email: "test@example.com", password: "password123", password_confirmation: "password123") }
+    let!(:user) { create(:user, password: "password123", password_confirmation: "password123") }
 
     it "logs out" do
       post session_path, params: { email: user.email, password: "password123" }
