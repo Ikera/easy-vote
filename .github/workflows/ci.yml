@@ -131,7 +131,11 @@ jobs:
         run: |
           bin/rails db:migrate
           bin/rails db:test:prepare
-          bundle exec rspec spec/system
+          if ls spec/system/*_spec.rb >/dev/null 2>&1; then
+            bundle exec rspec spec/system
+          else
+            echo "No system specs yet. Skipping system test job."
+          fi
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
