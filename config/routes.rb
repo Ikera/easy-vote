@@ -13,10 +13,11 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  root "home#index"
+  root "features#index"
 
   resource :session, only: [ :new, :create, :destroy ]
   resources :users, only: [ :new, :create ]
+  resources :features, only: [ :index, :new, :create ]
   resource :password_reset, only: [ :new, :create ], controller: :passwords
   resources :passwords, param: :token, only: [ :edit, :update ]
 end

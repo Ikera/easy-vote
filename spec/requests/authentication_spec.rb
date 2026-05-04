@@ -19,7 +19,8 @@ RSpec.describe "Authentication", type: :request do
 
       expect(response).to redirect_to(root_path)
       follow_redirect!
-      expect(response.body).to include("You are signed in as")
+      expect(response.body).to include("Feature Requests")
+      expect(response.body).to include("Welcome,")
     end
   end
 
@@ -27,7 +28,7 @@ RSpec.describe "Authentication", type: :request do
     let!(:user) { create(:user, password: "password123", password_confirmation: "password123") }
 
     it "logs in with valid credentials" do
-      post session_path, params: { email: user.email, password: "password123" }
+      sign_in_as(user)
 
       expect(response).to redirect_to(root_path)
     end
@@ -44,7 +45,7 @@ RSpec.describe "Authentication", type: :request do
     let!(:user) { create(:user, password: "password123", password_confirmation: "password123") }
 
     it "logs out" do
-      post session_path, params: { email: user.email, password: "password123" }
+      sign_in_as(user)
       delete session_path
 
       expect(response).to redirect_to(new_session_path)

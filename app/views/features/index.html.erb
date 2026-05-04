@@ -1,0 +1,27 @@
+<section class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-semibold tracking-tight text-[var(--color-ink)]">Feature Requests</h1>
+      <p class="mt-1 text-sm text-[var(--color-muted)]">Share ideas and vote on what should be built next.</p>
+    </div>
+    <%= link_to "New feature", new_feature_path, class: "rounded-lg bg-[var(--color-brand)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-brand-strong)]" %>
+  </div>
+
+  <% if @features.any? %>
+    <div class="space-y-4">
+      <% @features.each do |feature| %>
+        <article class="rounded-xl border border-[var(--color-border)] bg-white p-5 shadow-sm">
+          <div class="mb-2 flex items-center justify-between">
+            <h2 class="text-lg font-semibold text-[var(--color-ink)]"><%= feature.title %></h2>
+            <p class="text-xs text-[var(--color-muted)]">by <%= feature.user.name %></p>
+          </div>
+          <p class="text-sm text-[var(--color-muted)]"><%= feature.description %></p>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="rounded-xl border border-dashed border-[var(--color-border)] bg-white p-8 text-center">
+      <p class="text-sm text-[var(--color-muted)]">No features yet. Be the first to submit one.</p>
+    </div>
+  <% end %>
+</section>
