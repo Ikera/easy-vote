@@ -2,7 +2,11 @@ require "rails_helper"
 
 RSpec.describe "Features modal", type: :system do
   before do
-    driven_by(:rack_test)
+    if ENV["JS_SYSTEM_TESTS"] == "1"
+      driven_by(:selenium, using: :headless_chrome, screen_size: [1400, 1400])
+    else
+      driven_by(:rack_test)
+    end
   end
 
   let(:user) { create(:user, password: "password123", password_confirmation: "password123") }
