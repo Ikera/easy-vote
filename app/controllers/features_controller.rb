@@ -13,9 +13,16 @@ class FeaturesController < ApplicationController
     @feature = current_user.features.build(feature_params)
 
     if @feature.save
-      redirect_to features_path, notice: "Feature submitted successfully."
+      flash.now[:notice] = "Feature submitted successfully."
+      respond_to do |format|
+        format.turbo_stream { render :create }
+        format.html { redirect_to features_path, notice: "Feature submitted successfully." }
+      end
     else
-      render :new, status: :unprocessable_content
+      respond_to do |format|
+        format.turbo_stream { render :create_failure, status: :unprocessable_content }
+        format.html { render :new, status: :unprocessable_content }
+      end
     end
   end
 
