@@ -14,6 +14,8 @@
     <% end %>
   </div>
 
+  <%= render "pagination", next_page: @next_page %>
+
   <% if @features.none? %>
     <div class="rounded-xl border border-dashed border-[var(--color-border)] bg-white p-8 text-center">
       <p class="text-sm text-[var(--color-muted)]">No features yet. Be the first to submit one.</p>

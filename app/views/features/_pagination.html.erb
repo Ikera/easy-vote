@@ -1,0 +1,9 @@
+<% if next_page %>
+  <%= turbo_frame_tag "features_pagination",
+                      src: features_path(page: next_page, format: :turbo_stream),
+                      loading: :lazy do %>
+    <p class="py-4 text-center text-sm text-[var(--color-muted)]">Loading more features...</p>
+  <% end %>
+<% else %>
+  <%= turbo_frame_tag "features_pagination" %>
+<% end %>
