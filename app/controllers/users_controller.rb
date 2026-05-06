@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "Welcome, #{@user.name}!"
+      redirect_to root_path, status: :see_other, notice: "Welcome, #{@user.name}!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   private
 
   def redirect_if_authenticated
-    redirect_to root_path if logged_in?
+    redirect_to root_path, status: :see_other if logged_in?
   end
 
   def user_params

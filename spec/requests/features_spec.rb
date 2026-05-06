@@ -18,6 +18,28 @@ RSpec.describe "Features", type: :request do
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Feature Requests")
     end
+
+    it "renders five features per page" do
+      sign_in_as(user)
+      create_list(:feature, 7)
+
+      get features_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body.scan("<article").size).to eq(5)
+    end
+
+    it "returns turbo stream for the next feature page" do
+      sign_in_as(user)
+      create_list(:feature, 11)
+
+      get features_path(page: 2, format: :turbo_stream)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.media_type).to eq("text/vnd.turbo-stream.html")
+      expect(response.body).to include("action=\"append\" target=\"features\"")
+      expect(response.body).to include("action=\"replace\" target=\"features_pagination\"")
+    end
   end
 
   describe "GET /features/new" do

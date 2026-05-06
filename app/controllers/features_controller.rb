@@ -1,8 +1,16 @@
 class FeaturesController < ApplicationController
+  PER_PAGE = 5
+
   before_action :require_authentication
 
   def index
-    @features = Feature.includes(:user).order(created_at: :desc)
+    page = [ params.fetch(:page, 1).to_i, 1 ].max
+    @features, @next_page = paginated_features(page)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def new
@@ -27,6 +35,17 @@ class FeaturesController < ApplicationController
   end
 
   private
+
+  def paginated_features(page)
+    scoped_features = Feature.includes(:user).order(created_at: :desc)
+    offset = (page - 1) * PER_PAGE
+    chunk = scoped_features.offset(offset).limit(PER_PAGE + 1).to_a
+
+    next_page = page + 1 if chunk.length > PER_PAGE
+    features = chunk.first(PER_PAGE)
+
+    [ features, next_page ]
+  end
 
   def feature_params
     params.expect(feature: [ :title, :description ])

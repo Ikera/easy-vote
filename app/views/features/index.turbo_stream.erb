@@ -1,0 +1,7 @@
+<%= turbo_stream.append "features" do %>
+  <%= render @features %>
+<% end %>
+
+<%= turbo_stream.replace "features_pagination" do %>
+  <%= render "pagination", next_page: @next_page %>
+<% end %>
