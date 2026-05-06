@@ -30,6 +30,7 @@
 
         <nav class="flex items-center gap-4 text-sm">
           <% if logged_in? %>
+            <%= link_to "Features", features_path, class: "font-medium text-[var(--color-ink)] hover:text-[var(--color-brand)]" %>
             <span class="text-[var(--color-muted)]"><%= current_user.email %></span>
             <%= button_to "Log out", session_path, method: :delete, class: "rounded-lg border border-[var(--color-border)] px-3 py-1.5 font-medium text-[var(--color-ink)] hover:bg-slate-100" %>
           <% else %>
@@ -41,7 +42,7 @@
     </header>
 
     <main class="mx-auto w-full max-w-6xl px-5 py-10">
-      <%= render "shared/flash" %>
+      <div id="flash"><%= render "shared/flash" %></div>
       <%= yield %>
     </main>
   </body>

@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "modal", data: { controller: "modal", action: "turbo:frame-load->modal#open click->modal#closeOnBackdrop keydown@window->modal#closeOnEscape" } do %>
+  <% if mode == :open %>
+    <div class="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm"></div>
+
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <section class="w-full max-w-2xl rounded-2xl border border-[var(--color-border)] bg-white p-8 shadow-xl" data-modal-target="panel" role="dialog" aria-modal="true" aria-label="Submit a feature">
+        <%= render "form", feature: feature %>
+      </section>
+    </div>
+  <% end %>
+<% end %>

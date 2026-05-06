@@ -1,0 +1,26 @@
+<div>
+  <h2 class="mb-6 text-2xl font-semibold tracking-tight text-[var(--color-ink)]">Submit a feature</h2>
+
+  <%= form_with model: feature, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :title, class: "mb-1 block text-sm font-medium text-[var(--color-ink)]" %>
+      <%= f.text_field :title, class: "w-full rounded-lg border border-[var(--color-border)] px-3 py-2 focus:border-[var(--color-brand)] focus:outline-none", data: { modal_target: "firstInput" } %>
+      <% feature.errors.full_messages_for(:title).each do |message| %>
+        <p class="mt-1 text-sm text-[var(--color-danger)]"><%= message %></p>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :description, class: "mb-1 block text-sm font-medium text-[var(--color-ink)]" %>
+      <%= f.text_area :description, rows: 6, class: "w-full rounded-lg border border-[var(--color-border)] px-3 py-2 focus:border-[var(--color-brand)] focus:outline-none" %>
+      <% feature.errors.full_messages_for(:description).each do |message| %>
+        <p class="mt-1 text-sm text-[var(--color-danger)]"><%= message %></p>
+      <% end %>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <%= f.submit "Submit feature", class: "rounded-lg bg-[var(--color-brand)] px-4 py-2 font-medium text-white hover:bg-[var(--color-brand-strong)]" %>
+      <%= link_to "Cancel", "#", data: { action: "click->modal#close" }, class: "text-sm font-medium text-[var(--color-muted)] hover:text-[var(--color-ink)]" %>
+    </div>
+  <% end %>
+</div>

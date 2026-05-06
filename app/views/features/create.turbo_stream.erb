@@ -1,0 +1,7 @@
+<%= turbo_stream.prepend "features", partial: "features/feature", locals: { feature: @feature } %>
+<%= turbo_stream.replace "modal" do %>
+  <%= render "features/modal_frame", feature: Feature.new, mode: :closed %>
+<% end %>
+<%= turbo_stream.replace "flash" do %>
+  <div id="flash"><%= render "shared/flash" %></div>
+<% end %>
