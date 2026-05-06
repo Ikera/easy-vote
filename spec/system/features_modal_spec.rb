@@ -1,14 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Features modal", type: :system do
-  before do
-    if ENV["JS_SYSTEM_TESTS"] == "1"
-      driven_by(:selenium, using: :headless_chrome, screen_size: [1400, 1400])
-    else
-      driven_by(:rack_test)
-    end
-  end
-
   let(:user) { create(:user, password: "password123", password_confirmation: "password123") }
 
   it "opens modal, shows validation errors, and creates feature" do
@@ -21,6 +13,15 @@ RSpec.describe "Features modal", type: :system do
 
     click_link "New feature"
     expect(page).to have_content("Submit a feature")
+    expect(page).to have_css("turbo-frame#modal section")
+
+    # Stimulus-only behavior: closes modal client-side without navigation.
+    click_link "Cancel"
+    expect(page).not_to have_css("turbo-frame#modal section")
+
+    # Re-open modal for validation/create flow.
+    click_link "New feature"
+    expect(page).to have_css("turbo-frame#modal section")
 
     click_button "Submit feature"
     expect(page).to have_content("Title can't be blank")
